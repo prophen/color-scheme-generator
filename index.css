@@ -23,6 +23,9 @@ body {
   align-items: center;
   justify-content: center;
   border: 1px solid #e5e7eb;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+  position: relative;
+  z-index: 1;
 }
 input#base-color {
   width: 61px;
@@ -31,22 +34,97 @@ input#base-color {
   background-color: #e5e5e5;
   cursor: pointer;
 }
-select#scheme-mode {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  padding: 8px;
-  border: 0.5px solid #d1d5db;
-  background-color: #ffffff;
-  background-image: url("Icon.png");
-  background-repeat: no-repeat;
-  background-position: right 10px center;
-  cursor: pointer;
-  border-radius: 6px;
+.select {
+  position: relative;
   width: 312px;
+}
+.select-trigger {
+  width: 100%;
   height: 42px;
+  padding: 8px 20px 8px 12px;
+  border: 0.5px solid #d1d5db;
+  border-radius: 6px;
+  background-color: #ffffff;
+  cursor: pointer;
   font-family: inherit;
   font-size: 1rem;
+  color: #111827;
+  text-align: left;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.select-trigger:focus-visible {
+  outline: 2px solid #2563eb;
+  outline-offset: 2px;
+}
+.select-arrow {
+  width: 10px;
+  height: 10px;
+  border-right: 2px solid #6b7280;
+  border-bottom: 2px solid #6b7280;
+  transform: rotate(45deg);
+  margin-left: 12px;
+  flex-shrink: 0;
+}
+.select-options {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  width: 100%;
+  margin: 0;
+  padding: 6px 0;
+  list-style: none;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+  max-height: none;
+  overflow: visible;
+  z-index: 10;
+  display: none;
+  scrollbar-width: none;
+}
+.select-options::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+.select.is-open .select-options {
+  display: block;
+}
+.select-options [role="option"] {
+  padding: 10px 14px;
+  cursor: pointer;
+  color: #111827;
+}
+.select-options [role="option"].is-active,
+.select-options [role="option"]:hover {
+  background: #f3f4f6;
+}
+.select-options [role="option"][aria-selected="true"] {
+  font-weight: 600;
+  position: relative;
+}
+.select-options [role="option"][aria-selected="true"]::after {
+  content: "";
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  width: 10px;
+  height: 6px;
+  border-left: 2px solid #4f46e5;
+  border-bottom: 2px solid #4f46e5;
+  transform: translateY(-50%) rotate(-45deg);
+}
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
 }
 button#generate-scheme {
   background-color: #ffffff;

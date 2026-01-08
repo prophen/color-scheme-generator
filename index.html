@@ -20,20 +20,55 @@
           aria-label="base color"
         />
 
-        <select
-          id="scheme-mode"
-          name="scheme-mode"
-          aria-label="color scheme mode"
-        >
-          <option value="monochrome">Monochrome</option>
-          <option value="monochrome-dark">Monochrome Dark</option>
-          <option value="monochrome-light">Monochrome Light</option>
-          <option value="analogic">Analogic</option>
-          <option value="complement">Complement</option>
-          <option value="analogic-complement">Analogic Complement</option>
-          <option value="triad">Triad</option>
-          <option value="quad">Quad</option>
-        </select>
+        <div class="select" id="scheme-select">
+          <span class="sr-only" id="scheme-label">Color scheme mode</span>
+          <button
+            type="button"
+            class="select-trigger"
+            aria-haspopup="listbox"
+            aria-expanded="false"
+            aria-labelledby="scheme-label scheme-value"
+          >
+            <span id="scheme-value">Monochrome</span>
+            <span class="select-arrow" aria-hidden="true"></span>
+          </button>
+          <ul class="select-options" role="listbox" tabindex="-1">
+            <li
+              id="scheme-option-0"
+              role="option"
+              data-value="monochrome"
+              aria-selected="true"
+            >
+              Monochrome
+            </li>
+            <li id="scheme-option-1" role="option" data-value="monochrome-dark">
+              Monochrome Dark
+            </li>
+            <li
+              id="scheme-option-2"
+              role="option"
+              data-value="monochrome-light"
+            >
+              Monochrome Light
+            </li>
+            <li id="scheme-option-3" role="option" data-value="analogic">
+              Analogic
+            </li>
+            <li id="scheme-option-4" role="option" data-value="complement">
+              Complement
+            </li>
+            <li
+              id="scheme-option-5"
+              role="option"
+              data-value="analogic-complement"
+            >
+              Analogic Complement
+            </li>
+            <li id="scheme-option-6" role="option" data-value="triad">Triad</li>
+            <li id="scheme-option-7" role="option" data-value="quad">Quad</li>
+          </ul>
+          <input type="hidden" id="scheme-mode" name="scheme-mode" value="monochrome" />
+        </div>
         <button id="generate-scheme">Get color scheme</button>
       </div>
       <div class="colors">
