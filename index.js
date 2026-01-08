@@ -6,6 +6,7 @@ const schemeTrigger = schemeSelect.querySelector(".select-trigger");
 const schemeListbox = schemeSelect.querySelector(".select-options");
 const schemeValue = document.getElementById("scheme-value");
 const schemeInput = document.getElementById("scheme-mode");
+const hexCodeNodes = Array.from(document.querySelectorAll(".hex-code"));
 const schemeOptions = Array.from(
   schemeListbox.querySelectorAll('[role="option"]')
 );
@@ -18,13 +19,67 @@ function displayColors() {
   schemeArr.forEach((colorObj, index) => {
     const colorDiv = colorsContainer.querySelector(`.color-${index}`);
     colorDiv.style.backgroundColor = colorObj.hex.value;
+    colorDiv.dataset.hex = colorObj.hex.value;
   });
-  const hexCodesContainer = document.querySelector(".hex-codes");
   schemeArr.forEach((colorObj, index) => {
-    const hexDiv = hexCodesContainer.querySelectorAll(".hex-code")[index];
+    const hexDiv = hexCodeNodes[index];
     hexDiv.textContent = colorObj.hex.value;
+    hexDiv.dataset.hex = colorObj.hex.value;
   });
 }
+
+function copyHex(value) {
+  if (!value) return;
+  showToast(`Copied ${value}`);
+  if (navigator.clipboard && window.isSecureContext) {
+    navigator.clipboard.writeText(value);
+    return;
+  }
+  const textarea = document.createElement("textarea");
+  textarea.value = value;
+  textarea.setAttribute("readonly", "");
+  textarea.style.position = "absolute";
+  textarea.style.left = "-9999px";
+  document.body.appendChild(textarea);
+  textarea.select();
+  document.execCommand("copy");
+  textarea.remove();
+}
+
+let toastTimeout = null;
+function showToast(message) {
+  let toast = document.querySelector(".toast");
+  if (!toast) {
+    toast = document.createElement("div");
+    toast.className = "toast";
+    toast.setAttribute("role", "status");
+    toast.setAttribute("aria-live", "polite");
+    document.body.appendChild(toast);
+  }
+  toast.textContent = message;
+  toast.classList.add("is-visible");
+  if (toastTimeout) {
+    clearTimeout(toastTimeout);
+  }
+  toastTimeout = setTimeout(() => {
+    toast.classList.remove("is-visible");
+  }, 1400);
+}
+
+document.querySelector(".colors").addEventListener("click", (event) => {
+  const target = event.target.closest('[class^="color-"]');
+  if (!target) return;
+  const match = target.className.match(/color-(\d+)/);
+  const index = match ? Number(match[1]) : -1;
+  const fallbackHex = hexCodeNodes[index]?.textContent.trim();
+  copyHex(target.dataset.hex || fallbackHex);
+});
+
+document.querySelector(".hex-codes").addEventListener("click", (event) => {
+  const target = event.target.closest(".hex-code");
+  if (!target) return;
+  copyHex(target.dataset.hex || target.textContent.trim());
+});
 function setActiveOption(index) {
   const clampedIndex = Math.max(0, Math.min(index, schemeOptions.length - 1));
   activeIndex = clampedIndex;

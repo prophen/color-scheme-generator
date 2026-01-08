@@ -5,20 +5,23 @@ html,
 body {
   margin: 0;
   padding: 0;
+  height: 100%;
 }
 body {
   font-family: "Inter", sans-serif;
-  background-color: #1c1c1c;
 }
 .container {
-  max-width: 550px;
-  margin: 30px auto;
+  width: 100vw;
+  min-height: 100vh;
+  margin: 0;
   background-color: #ffffff;
+  display: flex;
+  flex-direction: column;
 }
 .color-select {
   display: flex;
   gap: 12px;
-  width: 550px;
+  width: 100%;
   height: 90px;
   align-items: center;
   justify-content: center;
@@ -126,6 +129,26 @@ input#base-color {
   clip: rect(0, 0, 0, 0);
   border: 0;
 }
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 24px;
+  transform: translateX(-50%) translateY(8px);
+  background: #111827;
+  color: #ffffff;
+  padding: 10px 16px;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 150ms ease, transform 150ms ease;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+  z-index: 999;
+}
+.toast.is-visible {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
 button#generate-scheme {
   background-color: #ffffff;
   color: #374151;
@@ -148,15 +171,19 @@ button#generate-scheme:active {
 .colors,
 .hex-codes {
   display: flex;
-  width: 550px;
+  width: 100%;
+}
+.colors {
+  flex: 1;
+  align-content: stretch;
 }
 .color-0,
 .color-1,
 .color-2,
 .color-3,
 .color-4 {
-  width: 110px;
-  height: 460px;
+  flex: 1 1 20%;
+  cursor: pointer;
 }
 .color-0 {
   background-color: #f55a5a;
@@ -179,7 +206,7 @@ button#generate-scheme:active {
   align-items: center;
 }
 .hex-code {
-  width: 110px;
+  flex: 1 1 20%;
   height: 46px;
   font-size: 0.75rem;
   text-align: center;
@@ -189,4 +216,87 @@ button#generate-scheme:active {
   align-items: center;
 
   border: 1px solid #e5e7eb;
+  cursor: pointer;
+}
+
+@media (min-width: 900px) {
+  .color-select {
+    height: 100px;
+    gap: 16px;
+  }
+
+  input#base-color {
+    width: 70px;
+    height: 48px;
+  }
+
+  .select {
+    width: 360px;
+  }
+
+  button#generate-scheme {
+    width: 150px;
+    height: 48px;
+    font-size: 0.85rem;
+  }
+
+  .color-0,
+  .color-1,
+  .color-2,
+  .color-3,
+  .color-4 {
+    flex-basis: 20%;
+  }
+
+  .hex-code {
+    height: 54px;
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .color-select {
+    flex-wrap: wrap;
+    height: auto;
+    padding: 12px;
+    gap: 10px;
+  }
+
+  .select {
+    flex: 1 1 220px;
+    width: auto;
+  }
+
+  input#base-color {
+    flex: 0 0 61px;
+  }
+
+  button#generate-scheme {
+    flex: 0 0 auto;
+  }
+
+  .colors,
+  .hex-codes {
+    flex-wrap: wrap;
+  }
+
+  .color-0,
+  .color-1,
+  .color-2,
+  .color-3,
+  .color-4,
+  .hex-code {
+    flex-basis: 50%;
+  }
+}
+
+@media (max-width: 400px) {
+  .color-0,
+  .color-1,
+  .color-2,
+  .color-3,
+  .color-4,
+  .hex-code {
+    flex-basis: 100%;
+  }
 }
