@@ -1,0 +1,113 @@
+* {
+  box-sizing: border-box;
+}
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+body {
+  font-family: "Inter", sans-serif;
+  background-color: #1c1c1c;
+}
+.container {
+  max-width: 550px;
+  margin: 30px auto;
+  background-color: #ffffff;
+}
+.color-select {
+  display: flex;
+  gap: 12px;
+  width: 550px;
+  height: 90px;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #e5e7eb;
+}
+input#base-color {
+  width: 61px;
+  height: 42px;
+  border: 0.5px solid #d1d5db;
+  background-color: #e5e5e5;
+  cursor: pointer;
+}
+select#scheme-mode {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  padding: 8px;
+  border: 0.5px solid #d1d5db;
+  background-color: #ffffff;
+  background-image: url("Icon.png");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  cursor: pointer;
+  border-radius: 6px;
+  width: 312px;
+  height: 42px;
+  font-family: inherit;
+  font-size: 1rem;
+}
+button#generate-scheme {
+  background-color: #ffffff;
+  color: #374151;
+  border: 1px solid #d1d5db;
+  border-radius: 4px;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 0.75rem;
+  width: 123px;
+  height: 42px;
+}
+
+button#generate-scheme:hover,
+button#generate-scheme:focus-visible {
+  background-color: #f3f4f6;
+}
+button#generate-scheme:active {
+  background-color: #e5e7eb;
+}
+.colors,
+.hex-codes {
+  display: flex;
+  width: 550px;
+}
+.color-1,
+.color-2,
+.color-3,
+.color-4,
+.color-5 {
+  width: 110px;
+  height: 460px;
+}
+.color-1 {
+  background-color: #f55a5a;
+}
+.color-2 {
+  background-color: #2b283a;
+}
+.color-3 {
+  background-color: #fbf3ab;
+}
+.color-4 {
+  background-color: #aad1b6;
+}
+.color-5 {
+  background-color: #a626d3;
+}
+.hex-codes {
+  justify-content: center;
+  align-items: center;
+}
+.hex-code {
+  width: 110px;
+  height: 46px;
+  font-size: 0.75rem;
+  text-align: center;
+  color: #2b283a;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  border: 1px solid #e5e7eb;
+}
